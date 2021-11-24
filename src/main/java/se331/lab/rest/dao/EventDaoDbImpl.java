@@ -7,7 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
+import se331.lab.rest.graphql.EventQuery;
 import se331.lab.rest.repository.EventRepository;
+
+import java.util.List;
 
 @Repository
 @Profile("db")
@@ -39,4 +42,10 @@ public class EventDaoDbImpl implements EventDao {
     public Page<Event> getEvent(String title, Pageable page) {
         return eventRepository.findByTitleIgnoreCaseContainingOrDescriptionIgnoreCaseContainingOrOrganizer_NameIgnoreCaseContaining(title,title,title,page);
     }
+
+    @Override
+    public List<Event> getEventByTitleAndCategory(EventQuery query) {
+        return eventRepository.findByTitleIgnoreCaseContainingAndCategory(query.getTitle(),query.getCategory());
+    }
+
 }

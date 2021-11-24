@@ -8,8 +8,10 @@ import se331.lab.rest.dao.EventDao;
 import se331.lab.rest.dao.OrganizerDao;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
+import se331.lab.rest.graphql.EventQuery;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -39,6 +41,11 @@ public class EventServiceImpl implements EventService{
         event.setOrganizer(organizer);
         organizer.getOwnEvents().add(event);
         return eventDao.save(event);
+    }
+
+    @Override
+    public List<Event> getEventByTitleAndCategory(EventQuery query) {
+        return eventDao.getEventByTitleAndCategory(query);
     }
 
     @Override

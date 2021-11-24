@@ -1,0 +1,10 @@
+type Query{
+    helloWorld:String
+    getEvent:EventDTO
+    getEvents:[EventDTO]
+    getEventById(id:Int):EventDTO
+    getEventByTitleAndCategory(query:InputEventQuery):[EventDTO]
+}
+type Mutation{
+    saveEvent(event:InputEvent):EventDTO
+}
